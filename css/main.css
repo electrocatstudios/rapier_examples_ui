@@ -1,0 +1,21 @@
+body {
+    background-color: #101010;
+}
+
+#canvas {
+    width: 1920;
+    height: 1080;
+    border: solid salmon;
+}
+
+.button_block{
+    margin-top: 10px;
+}
+
+.button_block button {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+    border-radius: 5px;
+}

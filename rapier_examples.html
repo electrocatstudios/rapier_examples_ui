@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rapier Examples | Electro Cat Studios</title>
+    
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/circle.js"></script>
+    <script type="text/javascript" src="js/block.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+    <link rel="stylesheet" href="css/main.css?t=1">
+</head>
+<body>
+    <div>
+        <canvas id="canvas" width="960" height="540"></canvas>
+    </div>
+    <div class="button_block">
+        <button onclick="select('blocks')">Blocks</button>
+        <button onclick="select('circles')">Circles</button>
+        <button onclick="select('players')">Players</button>
+    </div>
+    <div class="button_block">
+       
+        <button onclick="clear_blocks()">Clear</button>
+        <button onclick="remove_previous()">Remove Most Recent</button>
+    
+    </div>
+    <div class="button_block">
+        <button>Submit</button>
+    </div>
+</body>
+</html>
