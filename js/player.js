@@ -1,3 +1,5 @@
+const PLAYER_MAX_POWER = 150;
+
 function Player(_x, _y) {
     this.loc = {x: _x, y: _y};
     this.size = 5;
@@ -11,7 +13,6 @@ function Player(_x, _y) {
 }
 
 function updatePlayer(cur_x, cur_y){
-    // TODO: calculate power and rot
     let diff_x = cur_x - this.loc.x;
     let diff_y = cur_y - this.loc.y;
 
@@ -44,10 +45,13 @@ function updatePlayer(cur_x, cur_y){
     }else if(this.rot > Math.PI * 2){
         this.rot -= Math.PI * 2;
     }
+    if(this.power > PLAYER_MAX_POWER) {
+        this.power = PLAYER_MAX_POWER;
+    }
     console.log("Power: " + this.power);
 }
 
-function drawPlayer(ctx, cur_x, cur_y) {
+function drawPlayer(ctx) {
     let old_col = ctx.strokeStyle;
     let old_fill = ctx.fillStyle;
 
@@ -56,24 +60,15 @@ function drawPlayer(ctx, cur_x, cur_y) {
     ctx.fillStyle = this.color;
     ctx.fill();
 
-    if(cur_x !== null && cur_y !==null) {
-        // Draw line to current point - to indicate power
-        ctx.strokeStyle = "#ff0000";
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x, this.loc.y);
-        ctx.lineTo(cur_x, cur_y);
-        ctx.stroke();
-    } else {
-        let out_x = this.loc.x + (this.power * Math.sin(this.rot));
-        let out_y = this.loc.y + (this.power * Math.cos(this.rot));
+   
+    let out_x = this.loc.x + (this.power * Math.sin(this.rot));
+    let out_y = this.loc.y + (this.power * Math.cos(this.rot));
 
-        ctx.strokeStyle = "#ff0000";
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x, this.loc.y);
-        ctx.lineTo(out_x, out_y);
-        ctx.stroke();
-    }
-
+    ctx.strokeStyle = "#ff0000";
+    ctx.beginPath();
+    ctx.moveTo(this.loc.x, this.loc.y);
+    ctx.lineTo(out_x, out_y);
+    ctx.stroke();
 
     ctx.strokeStyle = old_col;
     ctx.fillStyle = old_fill;

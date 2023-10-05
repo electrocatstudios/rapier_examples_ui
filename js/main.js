@@ -51,7 +51,7 @@ function update() {
     }
 
     for(var i=0;i<players.length;i++){
-        players[i].draw(ctx,null,null);
+        players[i].draw(ctx);
     }
     
     if(next_block!==null){
@@ -59,8 +59,7 @@ function update() {
     }
     
     if(next_player!==null){
-        console.log("Draw the player");
-        next_player.draw(ctx, last_loc.x, last_loc.y);
+        next_player.draw(ctx);
     }
 
     // Debug information
