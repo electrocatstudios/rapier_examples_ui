@@ -19,3 +19,14 @@ body {
     border: none;
     border-radius: 5px;
 }
+
+#open_button {
+    margin-top: 10px;
+
+}
+#open_button a {
+    background-color: wheat;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}

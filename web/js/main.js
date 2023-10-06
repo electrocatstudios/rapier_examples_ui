@@ -6,6 +6,7 @@ const INTERVAL = 1000/30; // Number of ms per frame
 const WIDTH = 960;
 const HEIGHT = 540;
 const MAX_PLAYERS = 4;
+const SCALE = 20;
 
 $(document).ready(function () {
     canvas = document.getElementById('canvas');
@@ -145,4 +146,55 @@ function remove_previous() {
 
 function select(new_mode) {
     mode = new_mode;
+}
+
+function submit() {
+    var body = {Blocks:[], Users:[]};
+    for(var i=0;i<blocks.length;i++) {
+        var block = blocks[i];
+        var loc = {"X": (block.loc.x - WIDTH/2)/SCALE, "Y": (block.loc.y-HEIGHT/2)/SCALE}
+        body.Blocks.push({
+            "Name": "Block" + i,
+            "Location": loc,
+            "Scale": {"X": block.size.x/SCALE, "Y": block.size.y/SCALE}
+        });
+    }
+    for(var i=0;i<players.length;i++) {
+        var p = players[i];
+        body.Users.push({
+            "Location": {"X": (p.loc.x-WIDTH/2)/SCALE, "Y": (p.loc.y-HEIGHT/2)/SCALE},
+            "Rotation": p.rot,
+            "Power": p.power/PLAYER_MAX_POWER,
+            "Color": {"R": 0, "G": 255, "B": 0}
+        });
+    }
+    for(var i=0;i<circles.length;i++) {
+        var p = circles[i];
+        body.Users.push({
+            "Location": {"X": (p.loc.x-WIDTH/2)/SCALE, "Y": (p.loc.y-HEIGHT/2)/SCALE},
+            "Rotation": 0.0,
+            "Power": 0.0,
+            "Color": {"R": 255, "G": 255, "B": 255}
+        });
+    }
+
+    console.log(body);
+
+    $.ajax({
+        type: "POST",
+        url: "/api/submit",
+        contentType: "application/json",
+        data: JSON.stringify(body),
+        success: function(e){
+            console.log(e);
+            let output = "<a href='/video/" + e.filename + "' target='_blank'>See Video</a>";
+            output += "<a href='/json/" + e.filename + "' target='_blank'>See JSON</a>"
+            $('#open_button').html(output);
+        },
+        error: function(e) {
+            console.log("Error while submittting");
+            console.log(e);
+        }
+      });
+
 }
