@@ -11,7 +11,7 @@ RUN git clone https://github.com/electrocatstudios/rapier_examples.git
 
 RUN cd rapier_examples && cargo build --release
 
-FROM python:3.10-alpine
+FROM python:latest
 
 WORKDIR /app
 
@@ -26,5 +26,6 @@ COPY web/css /app/css
 COPY web/js /app/js
 COPY web/*.html /app/
 
+# CMD ["bash"]
 CMD ["python3", "main.py"]
 
