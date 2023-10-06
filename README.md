@@ -35,3 +35,5 @@ Once the scene is complete, hit the submit button. It will process the video
 sending it to the server to run the renderer against it. When completed (it
 can take up to a minute to render more complex scenes), you will see two 
 buttons, to view either the video or the JSON that produced it. 
+
+![Show video when ready](show_video.gif "Showing Video after Render")
