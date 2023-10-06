@@ -21,12 +21,13 @@ body {
 }
 
 #open_button {
-    margin-top: 10px;
-
+    margin-top: 25px;
 }
 #open_button a {
     background-color: wheat;
     padding: 10px;
     border-radius: 5px;
     margin-left: 10px;
+    margin-top: 5px;
+    margin-top: 5px;
 }
