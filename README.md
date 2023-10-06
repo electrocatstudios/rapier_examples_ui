@@ -12,3 +12,12 @@ python -m http.server
 ```
 
 You can then access the page on [localhost:8000/rapier_examples.html](localhost:8000/rapier_examples.html)
+
+### Run with Docker
+
+```bash 
+docker build -t rapier_examples .
+docker run -ti -p 8000:8000 rapier_examples
+```
+
+Then access the page on [localhost:8000](localhost:8000)
