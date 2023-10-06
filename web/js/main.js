@@ -66,7 +66,11 @@ function update() {
     // Debug information
     ctx.font = "24px arial";
     ctx.fillStyle = "#ff0000";
-    ctx.fillText("X: " + last_loc.x + ", Y: " + last_loc.y , 10, HEIGHT - 20);
+    
+    var locx = last_loc.x - WIDTH/2;
+    var locy = last_loc.y - HEIGHT/2;
+    
+    ctx.fillText("X: " +  locx + ", Y: " + locy , 10, HEIGHT - 20);
     ctx.fillText("Mode: " + mode , 10, 30);
     
     if(mode == "players") {
@@ -138,6 +142,8 @@ function mouseup(e) {
 
 function clear_blocks(){
     blocks = [];
+    players = [];
+    circles = [];
 }
 
 function remove_previous() {
@@ -152,11 +158,12 @@ function submit() {
     var body = {Blocks:[], Users:[]};
     for(var i=0;i<blocks.length;i++) {
         var block = blocks[i];
-        var loc = {"X": (block.loc.x - WIDTH/2)/SCALE, "Y": (block.loc.y-HEIGHT/2)/SCALE}
+        var pt = {x: block.loc.x + (block.size.x/2), y: block.loc.y + (block.size.y/2)};
+        var loc = {"X": (pt.x - WIDTH/2)/SCALE, "Y": (pt.y-HEIGHT/2)/SCALE}
         body.Blocks.push({
             "Name": "Block" + i,
             "Location": loc,
-            "Scale": {"X": block.size.x/SCALE, "Y": block.size.y/SCALE}
+            "Scale": {"X": (block.size.x/SCALE), "Y": (block.size.y/SCALE)}
         });
     }
     for(var i=0;i<players.length;i++) {
@@ -178,7 +185,8 @@ function submit() {
         });
     }
 
-    console.log(body);
+    // console.log(body);
+    $('#submit_button').html("<span style='color:white'>Processing</span>");
 
     $.ajax({
         type: "POST",
@@ -190,8 +198,10 @@ function submit() {
             let output = "<a href='/video/" + e.filename + "' target='_blank'>See Video</a>";
             output += "<a href='/json/" + e.filename + "' target='_blank'>See JSON</a>"
             $('#open_button').html(output);
+            $('#submit_button').html("<span style='color:white'>Finished</span>");
         },
         error: function(e) {
+            $('#submit_button').html("<span style='color:red'>Error during processing</span>");
             console.log("Error while submittting");
             console.log(e);
         }

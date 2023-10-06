@@ -48,7 +48,6 @@ function updatePlayer(cur_x, cur_y){
     if(this.power > PLAYER_MAX_POWER) {
         this.power = PLAYER_MAX_POWER;
     }
-    console.log("Power: " + this.power);
 }
 
 function drawPlayer(ctx) {
