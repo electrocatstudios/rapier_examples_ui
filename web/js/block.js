@@ -16,3 +16,5 @@ function drawBlock(ctx) {
 
     ctx.strokeStyle = old_col;
 }
+
+module.exports = Block;
